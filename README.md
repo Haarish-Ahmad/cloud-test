@@ -28,10 +28,6 @@ This project is a cloud-native e-commerce application designed to demonstrate mo
 * AWS
 * Prometheus & Grafana
 
-## Project Status
-
-**Current Phase:** Repository Setup (Day 1)
-
 ## Author
 
 Haarish Ahmad
