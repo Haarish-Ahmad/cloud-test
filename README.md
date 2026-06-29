@@ -9,7 +9,6 @@ This project is a cloud-native e-commerce application designed to demonstrate mo
 * Browse available products
 * Add and remove items from the shopping cart
 * Place customer orders
-* RESTful Product and Order APIs
 * Dockerized frontend and backend services
 * Automated CI/CD with Jenkins
 * Infrastructure provisioning using Terraform
