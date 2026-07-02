@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <style>
+        .checkout-container { max-width: 500px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group textarea { width: 100%; padding: 8px; }
+        .summary { background: #f9f9f9; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>Checkout</h1>
+    <a href="cart.html">← Back to Cart</a>
+    <hr>
+
+    <div class="checkout-container">
+        <div class="summary">
+            <h3>Order Summary</h3>
+            <p>Total Items: <span id="summary-items">0</span></p>
+            <p><strong>Total Amount: $<span id="summary-total">0.00</span></strong></p>
+        </div>
+
+        <h2>Shipping Details</h2>
+        
+        <form id="checkoutForm">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" id="phone" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Shipping Address</label>
+                <textarea id="address" rows="4" required></textarea>
+            </div>
+            
+            <button type="submit">Place Order</button>
+            
+            <p id="message" style="margin-top: 15px; font-weight: bold; font-size: 1.2em;"></p>
+        </form>
+    </div>
+
+    <script src="checkout.js"></script>
+</body>
+</html>
