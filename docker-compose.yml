@@ -1,0 +1,38 @@
+services:
+  frontend:
+    build: ./frontend
+    container_name: frontend
+
+    ports:
+      - "8080:80"
+      
+    depends_on:
+      - backend
+      
+  backend:
+    build: ./backend
+    container_name: backend
+    
+    ports:
+      - "3000:3000"
+      
+    env_file:
+      - ./backend/.env
+      
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    
+    restart: always
+    
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      
+    volumes:
+      - mysql_data:/var/lib/mysql
+      
+volumes:
+  mysql_data:
