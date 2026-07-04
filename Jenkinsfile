@@ -44,18 +44,16 @@ pipeline {
 	    steps {
 		script {
 		    echo "Enforcing Security Threshold: Scanning Backend Image..."
-		    // `--scanners vuln` restricts scanning strictly to core vulnerabilities 
-		    // This prevents it from demanding a Java DB initialization
 		    sh """
 		    docker run --rm \
 		        -v /var/run/docker.sock:/var/run/docker.sock \
 		        -v trivy-db-cache:/root/.cache/trivy \
 		        aquasec/trivy:latest image \
 		        --scanners vuln \
+		        --pkg-types os,library \
 		        --severity CRITICAL \
 		        --ignore-unfixed \
 		        --skip-db-update \
-		        --skip-java-db-update \
 		        --exit-code 1 \
 		        cloud-ecommerce-pipeline-backend:latest
 		    """
@@ -67,10 +65,10 @@ pipeline {
 		        -v trivy-db-cache:/root/.cache/trivy \
 		        aquasec/trivy:latest image \
 		        --scanners vuln \
+		        --pkg-types os,library \
 		        --severity CRITICAL \
 		        --ignore-unfixed \
 		        --skip-db-update \
-		        --skip-java-db-update \
 		        --exit-code 1 \
 		        cloud-ecommerce-pipeline-frontend:latest
 		    """
