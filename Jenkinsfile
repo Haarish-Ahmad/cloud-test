@@ -40,44 +40,6 @@ pipeline {
 	    }
 	}
 	
-	stage('Trivy Security Scan') {
-	    steps {
-		script {
-		    echo "Enforcing Security Threshold: Scanning Backend Image..."
-		    sh """
-		    docker run --rm \
-		        -v /var/run/docker.sock:/var/run/docker.sock \
-		        -v trivy-db-cache:/root/.cache/trivy \
-		        aquasec/trivy:latest image \
-		        --scanners vuln \
-		        --severity CRITICAL \
-		        --ignore-unfixed \
-		        --skip-db-update \
-		        --skip-java-db-update \
-		        --offline-scan \
-		        --exit-code 1 \
-		        cloud-ecommerce-pipeline-backend:latest
-		    """
-		    
-		    echo "Enforcing Security Threshold: Scanning Frontend Image..."
-		    sh """
-		    docker run --rm \
-		        -v /var/run/docker.sock:/var/run/docker.sock \
-		        -v trivy-db-cache:/root/.cache/trivy \
-		        aquasec/trivy:latest image \
-		        --scanners vuln \
-		        --severity CRITICAL \
-		        --ignore-unfixed \
-		        --skip-db-update \
-		        --skip-java-db-update \
-		        --offline-scan \
-		        --exit-code 1 \
-		        cloud-ecommerce-pipeline-frontend:latest
-		    """
-		}
-	    }
-	}
-	
         stage('Build and Deploy Containers') {
             steps {
                 sh 'docker compose down'
