@@ -21,6 +21,23 @@ pipeline {
             }
         }
 
+        // --- NEW SONARQUBE STAGE ADDED HERE ---
+        stage('SonarQube Analysis') {
+            steps {
+                withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                    sh """
+                    docker run --rm \
+                        -v "\$(pwd):/usr/src" \
+                        sonarsource/sonar-scanner-cli \
+                        -Dsonar.projectKey=cloud-ecommerce \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=http://sonarqube:9000 \
+                        -Dsonar.login=${SONAR_TOKEN}
+                    """
+                }
+            }
+        }
+
         stage('Build and Deploy Containers') {
             steps {
                 sh 'docker compose down'
