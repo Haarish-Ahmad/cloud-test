@@ -25,7 +25,7 @@ pipeline {
         stage('SonarQube Analysis') {
 	    steps {
 		// 1. Automatically injects Node.js into the environment for this stage
-		nodejs('Node-20') {
+		nodejs('node-20') {
 		    withSonarQubeEnv('SonarQube-Server') {
 		        script {
 		            def scannerHome = tool 'sonar-scanner'
