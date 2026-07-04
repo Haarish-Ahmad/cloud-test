@@ -53,6 +53,7 @@ pipeline {
 		        --severity CRITICAL \
 		        --ignore-unfixed \
 		        --exit-code 1 \
+		        --timeout 15m \
 		        cloud-ecommerce-pipeline-backend:latest
 		    """
 		    
@@ -64,6 +65,7 @@ pipeline {
 		        --severity CRITICAL \
 		        --ignore-unfixed \
 		        --exit-code 1 \
+		        --timeout 15m \
 		        cloud-ecommerce-pipeline-frontend:latest
 		    """
 		}
