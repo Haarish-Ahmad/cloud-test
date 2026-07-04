@@ -50,10 +50,11 @@ pipeline {
 		        -v trivy-db-cache:/root/.cache/trivy \
 		        aquasec/trivy:latest image \
 		        --scanners vuln \
-		        --pkg-types os,library \
 		        --severity CRITICAL \
 		        --ignore-unfixed \
 		        --skip-db-update \
+		        --skip-java-db-update \
+		        --offline-scan \
 		        --exit-code 1 \
 		        cloud-ecommerce-pipeline-backend:latest
 		    """
@@ -65,10 +66,11 @@ pipeline {
 		        -v trivy-db-cache:/root/.cache/trivy \
 		        aquasec/trivy:latest image \
 		        --scanners vuln \
-		        --pkg-types os,library \
 		        --severity CRITICAL \
 		        --ignore-unfixed \
 		        --skip-db-update \
+		        --skip-java-db-update \
+		        --offline-scan \
 		        --exit-code 1 \
 		        cloud-ecommerce-pipeline-frontend:latest
 		    """
