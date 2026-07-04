@@ -52,6 +52,7 @@ pipeline {
 		        --severity CRITICAL \
 		        --ignore-unfixed \
 		        --skip-db-update \
+		        --skip-java-db-update \
 		        --exit-code 1 \
 		        cloud-ecommerce-pipeline-backend:latest
 		    """
@@ -65,6 +66,7 @@ pipeline {
 		        --severity CRITICAL \
 		        --ignore-unfixed \
 		        --skip-db-update \
+		        --skip-java-db-update \
 		        --exit-code 1 \
 		        cloud-ecommerce-pipeline-frontend:latest
 		    """
