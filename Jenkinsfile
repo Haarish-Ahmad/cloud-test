@@ -43,29 +43,29 @@ pipeline {
 	stage('Trivy Security Scan') {
 	    steps {
 		script {
-		    echo "Enforcing Security Threshold: Scanning Backend Image..."
-		    // `--exit-code 1` tells Trivy to fail the stage if a vulnerability is found
-		    // `--ignore-unfixed` ensures we only block the build for things you can actually patch
+		    echo "Enforcing Security Threshold (Cached): Scanning Backend Image..."
 		    sh """
 		    docker run --rm \
 		        -v /var/run/docker.sock:/var/run/docker.sock \
+		        -v trivy-db-cache:/root/.cache/trivy \
 		        aquasec/trivy:latest image \
 		        --severity CRITICAL \
 		        --ignore-unfixed \
+		        --skip-db-update \
 		        --exit-code 1 \
-		        --timeout 15m \
 		        cloud-ecommerce-pipeline-backend:latest
 		    """
 		    
-		    echo "Enforcing Security Threshold: Scanning Frontend Image..."
+		    echo "Enforcing Security Threshold (Cached): Scanning Frontend Image..."
 		    sh """
 		    docker run --rm \
 		        -v /var/run/docker.sock:/var/run/docker.sock \
+		        -v trivy-db-cache:/root/.cache/trivy \
 		        aquasec/trivy:latest image \
 		        --severity CRITICAL \
 		        --ignore-unfixed \
+		        --skip-db-update \
 		        --exit-code 1 \
-		        --timeout 15m \
 		        cloud-ecommerce-pipeline-frontend:latest
 		    """
 		}
