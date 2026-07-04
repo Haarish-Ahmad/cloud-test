@@ -23,19 +23,19 @@ pipeline {
 
         // --- NEW SONARQUBE STAGE ADDED HERE ---
         stage('SonarQube Analysis') {
-	    steps {
-	    
-		withSonarQubeEnv('SonarQube-Server') {
-		
-		    def scannerHome = tool 'sonar-scanner'
-		    sh """
-		    ${scannerHome}/bin/sonar-scanner \
-		        -Dsonar.projectKey=cloud-ecommerce \
-		        -Dsonar.sources=.
-		    """
-		}
-	    }
-	}
+            steps {
+                withSonarQubeEnv('SonarQube-Server') {
+                    script {
+                        def scannerHome = tool 'sonar-scanner'
+                        sh """
+                        ${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=cloud-ecommerce \
+                            -Dsonar.sources=.
+                        """
+                    }
+                }
+            }
+        }
 
         stage('Build and Deploy Containers') {
             steps {
