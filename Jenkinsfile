@@ -40,6 +40,36 @@ pipeline {
 	    }
 	}
 	
+	stage('Trivy Security Scan') {
+	    steps {
+		script {
+		    echo "Enforcing Security Threshold: Scanning Backend Image..."
+		    // `--exit-code 1` tells Trivy to fail the stage if a vulnerability is found
+		    // `--ignore-unfixed` ensures we only block the build for things you can actually patch
+		    sh """
+		    docker run --rm \
+		        -v /var/run/docker.sock:/var/run/docker.sock \
+		        aquasec/trivy:latest image \
+		        --severity CRITICAL \
+		        --ignore-unfixed \
+		        --exit-code 1 \
+		        cloud-ecommerce-pipeline-backend:latest
+		    """
+		    
+		    echo "Enforcing Security Threshold: Scanning Frontend Image..."
+		    sh """
+		    docker run --rm \
+		        -v /var/run/docker.sock:/var/run/docker.sock \
+		        aquasec/trivy:latest image \
+		        --severity CRITICAL \
+		        --ignore-unfixed \
+		        --exit-code 1 \
+		        cloud-ecommerce-pipeline-frontend:latest
+		    """
+		}
+	    }
+	}
+	
         stage('Build and Deploy Containers') {
             steps {
                 sh 'docker compose down'
