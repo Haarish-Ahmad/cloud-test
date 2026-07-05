@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // --- 1. CLOUD VARIABLES ---
-        AWS_ACCOUNT_ID = 'YOUR_AWS_ACCOUNT_ID'
+        AWS_ACCOUNT_ID = '253214430300'
         AWS_REGION = 'ap-south-1'
         ECR_REGISTRY = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
         CLUSTER_NAME = 'ecommerce-eks-cluster'
