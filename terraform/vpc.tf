@@ -25,6 +25,7 @@ resource "aws_subnet" "public_1" {
   tags = {
     Name                     = "ecommerce-public-1"
     "kubernetes.io/role/elb" = "1"
+    "kubernetes.io/cluster/ecommerce-eks-cluster" = "shared"
   }
 }
 
@@ -37,6 +38,7 @@ resource "aws_subnet" "public_2" {
   tags = {
     Name                     = "ecommerce-public-2"
     "kubernetes.io/role/elb" = "1"
+    "kubernetes.io/cluster/ecommerce-eks-cluster" = "shared"
   }
 }
 

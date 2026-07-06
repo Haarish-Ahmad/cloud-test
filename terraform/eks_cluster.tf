@@ -16,7 +16,27 @@ resource "aws_iam_role_policy_attachment" "cluster_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
-# --- 2. NODE IAM ROLE (NEW) ---
+resource "aws_iam_role_policy_attachment" "cluster_compute_policy" {
+  role       = aws_iam_role.cluster_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSComputePolicy"
+}
+
+resource "aws_iam_role_policy_attachment" "cluster_lb_policy" {
+  role       = aws_iam_role.cluster_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSLoadBalancingPolicy"
+}
+
+resource "aws_iam_role_policy_attachment" "cluster_network_policy" {
+  role       = aws_iam_role.cluster_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSNetworkingPolicy"
+}
+
+resource "aws_iam_role_policy_attachment" "cluster_storage_policy" {
+  role       = aws_iam_role.cluster_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSBlockStoragePolicy"
+}
+
+# --- 2. NODE IAM ROLE ---
 resource "aws_iam_role" "node_role" {
   name = "ecommerce-eks-node-role"
   assume_role_policy = jsonencode({
