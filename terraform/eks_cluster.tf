@@ -111,8 +111,9 @@ resource "aws_iam_role_policy_attachment" "node_policy_cloudwatch" {
 resource "aws_eks_addon" "cloudwatch_observability" {
   cluster_name  = aws_eks_cluster.main.name
   addon_name    = "aws-cloudwatch-observability"
+  
+  addon_version = "v3.7.0-eksbuild.1" 
 
-  # We tell Terraform to wait until the cluster and node role are fully ready
   depends_on = [
     aws_eks_cluster.main,
     aws_iam_role_policy_attachment.node_policy_cloudwatch
