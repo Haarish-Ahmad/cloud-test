@@ -98,3 +98,23 @@ resource "aws_eks_cluster" "main" {
     }
   }
 }
+
+# --- 4. CLOUDWATCH OBSERVABILITY ---
+
+# Grant the EKS Auto Mode nodes permission to send data to CloudWatch
+resource "aws_iam_role_policy_attachment" "node_policy_cloudwatch" {
+  role       = aws_iam_role.node_role.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+}
+
+# Install the CloudWatch agent directly into the cluster
+resource "aws_eks_addon" "cloudwatch_observability" {
+  cluster_name  = aws_eks_cluster.main.name
+  addon_name    = "aws-cloudwatch-observability"
+
+  # We tell Terraform to wait until the cluster and node role are fully ready
+  depends_on = [
+    aws_eks_cluster.main,
+    aws_iam_role_policy_attachment.node_policy_cloudwatch
+  ]
+}
