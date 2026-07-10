@@ -1,0 +1,15 @@
+# Ignore local environment files (Jenkins handles these securely)
+.env
+backend/.env
+node_modules/
+*.log
+
+# Ignore Terraform local data and plugins
+**/.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+crash.log
+
+# Ignore OS files
+.DS_Store

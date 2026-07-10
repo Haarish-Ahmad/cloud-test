@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+    <style>
+        .cart-item { 
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            margin-bottom: 10px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            max-width: 500px;
+        }
+        .cart-controls button {
+            margin: 0 5px;
+        }
+        .total-section {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Your Shopping Cart</h1>
+    <a href="index.html">← Back to Store</a>
+
+    <hr>
+
+    <div id="cart-container"></div>
+
+    <div class="total-section">
+        Total: $<span id="cart-total">0.00</span>
+    </div>
+
+    <br>
+    <button id="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+
+    <script src="cart.js"></script>
+</body>
+</html>
