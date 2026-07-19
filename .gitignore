@@ -1,6 +1,5 @@
 # Ignore local environment files (Jenkins handles these securely)
-.env
-backend/.env
+*.env
 node_modules/
 *.log
 

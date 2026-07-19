@@ -3,7 +3,6 @@ services:
     image: my-custom-jenkins:latest
     container_name: jenkins
     restart: unless-stopped
-    user: root
     ports:
       - "8081:8080"
       - "50000:50000"
@@ -26,7 +25,6 @@ services:
 
 volumes:
   jenkins_ecommerce_home:
-    external: true
   sonarqube_data:
   sonarqube_logs:
   sonarqube_extensions:
